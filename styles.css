@@ -1,0 +1,144 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f0f0f0;
+    color: #333;
+    overflow-x: hidden;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(45deg, #6a11cb, #2575fc);
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.hero .name {
+    font-size: 3em;
+    font-weight: bold;
+    animation: fadeIn 1.5s ease-out;
+}
+
+.hero .role {
+    font-size: 1.5em;
+    margin-top: 10px;
+    opacity: 0;
+    animation: fadeIn 2s ease-out 0.5s forwards;
+}
+
+/* Sections */
+.section {
+    padding: 50px 20px;
+    text-align: center;
+    background-color: white;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(30px);
+    opacity: 0;
+    animation: slideUp 1s ease-out forwards;
+}
+
+h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.timeline {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.timeline li {
+    background-color: #f4f4f4;
+    margin: 10px 0;
+    padding: 20px;
+    border-left: 5px solid #2575fc;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.timeline li:hover {
+    transform: scale(1.05);
+}
+
+.btn {
+    background-color: #2575fc;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1.2em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #6a11cb;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Contact Section */
+.contact-info {
+    background-color: #e6e6e6;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #2575fc;
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .name {
+        font-size: 2.5em;
+    }
+
+    .role {
+        font-size: 1.2em;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .contact-info p {
+        font-size: 1em;
+    }
+}
