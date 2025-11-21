@@ -1,55 +1,334 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Currículum de Lluc Sánchez</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lluc Sánchez — CV</title>
+  <meta name="description" content="Currículum profesional de Lluc Sánchez — sitio estilo futurista, oscuro y minimalista." />
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#06060a;
+      --panel:#0f1115;
+      --muted:#9aa3b2;
+      --accent-1:#00ffe7; /* cian neón */
+      --accent-2:#7c5cff; /* violeta */
+      --glass: rgba(255,255,255,0.03);
+      --glass-2: rgba(255,255,255,0.02);
+      --radius: 14px;
+      color-scheme: dark;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:radial-gradient(circle at 10% 10%, rgba(124,92,255,0.06), transparent 5%), linear-gradient(180deg,#05060a 0%, #07080c 100%);background-color:var(--bg);color:#e8eef6}
+
+    /* layout */
+    .wrap{min-height:100vh;display:grid;grid-template-columns:360px 1fr;gap:32px;padding:48px;align-items:start}
+    @media (max-width:900px){.wrap{grid-template-columns:1fr;padding:28px;gap:20px}}
+
+    /* left column */
+    .sidebar{position:relative;padding:28px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:var(--radius);backdrop-filter:blur(6px);box-shadow:0 6px 30px rgba(2,6,23,0.6)}
+    .logo{display:flex;align-items:center;gap:14px}
+    .avatar{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--accent-2),var(--accent-1));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px}
+    h1{font-size:20px;margin:6px 0 0}
+    p.role{margin:6px 0 14px;color:var(--muted);font-size:13px}
+
+    .contact{margin-top:20px;font-size:14px}
+    .contact a{display:block;color:var(--muted);text-decoration:none;margin:10px 0}
+
+    .skills{margin-top:18px}
+    .skill{margin:12px 0}
+    .skill .label{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+    .bar{height:8px;background:var(--glass);border-radius:999px;overflow:hidden;margin-top:8px}
+    .bar > i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));width:0;transition:width 1s ease}
+
+    /* main column */
+    .main{position:relative;padding:28px;border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);box-shadow:0 8px 40px rgba(2,6,23,0.6);backdrop-filter: blur(6px)}
+
+    .hero{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .intro{max-width:62%}
+    .intro h2{font-size:28px;margin:0 0 8px}
+    .intro p{color:var(--muted);margin:0}
+
+    .actions{display:flex;gap:12px}
+    .btn{padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);cursor:pointer;color:#eaf6f2;font-weight:600}
+    .btn.ghost{background:transparent;border:1px solid var(--glass)}
+
+    /* cards */
+    .card{padding:18px;margin-top:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent)}
+    .card h3{margin:0 0 8px}
+    .timeline{display:grid;gap:12px}
+    .item{padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border:1px solid rgba(255,255,255,0.02)}
+    .item .meta{font-size:13px;color:var(--muted)}
+
+    /* projects grid */
+    .projects{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+    @media (max-width:1100px){.projects{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:700px){.projects{grid-template-columns:1fr}}
+    .project{padding:12px;border-radius:10px;background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));cursor:pointer;border:1px solid rgba(255,255,255,0.02)}
+    .project h4{margin:0 0 6px}
+    .project p{margin:0;color:var(--muted);font-size:13px}
+
+    /* footer / contact */
+    .contacts-row{display:flex;gap:12px;flex-wrap:wrap}
+
+    /* neon edges */
+    .neon-line{position:absolute;inset:0;border-radius:18px;pointer-events:none}
+    .neon-line:before{content:"";position:absolute;inset:2px;border-radius:16px;padding:1px;background:linear-gradient(90deg, rgba(0,255,231,0.06), rgba(124,92,255,0.06));box-shadow:0 0 20px rgba(0,255,231,0.02)}
+
+    /* small utilities */
+    .muted{color:var(--muted)}
+
+    /* animations */
+    .glow{animation:glow 3s ease-in-out infinite}
+    @keyframes glow{0%{filter:drop-shadow(0 0 8px rgba(0,255,231,0.08))}50%{filter:drop-shadow(0 0 18px rgba(124,92,255,0.08))}100%{filter:drop-shadow(0 0 8px rgba(0,255,231,0.08))}}
+
+    /* modal */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.6);z-index:60}
+    .modal.open{display:flex}
+    .modal .box{width:min(920px,92%);background:linear-gradient(180deg, #0b0c0f, #071018);padding:20px;border-radius:12px}
+
+    /* header small */
+    .tag{display:inline-block;padding:6px 10px;border-radius:999px;font-size:12px;background:linear-gradient(90deg, rgba(255,255,255,0.02), transparent);border:1px solid rgba(255,255,255,0.02)}
+
+    /* canvas background */
+    #starfield{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+    /* subtle focus */
+    a:focus,button:focus{outline:2px solid rgba(0,255,231,0.12);outline-offset:2px}
+
+  </style>
 </head>
 <body>
-    <header class="hero">
-        <div class="overlay">
-            <div class="container">
-                <h1 class="name">Lluc Sánchez</h1>
-                <p class="role">Desarrollador Web | Diseñador UX/UI</p>
-            </div>
+  <canvas id="starfield"></canvas>
+  <div class="wrap" style="position:relative;z-index:2">
+
+    <aside class="sidebar">
+      <div class="logo">
+        <div class="avatar">LS</div>
+        <div>
+          <h1>Lluc Sánchez</h1>
+          <p class="role">Currículum — Diseño futurista • Minimalista</p>
         </div>
-    </header>
+      </div>
 
-    <section id="about" class="section">
-        <h2>Acerca de mí</h2>
-        <p>Soy un apasionado por la creación de experiencias interactivas que marquen la diferencia. Me encanta innovar con cada línea de código.</p>
-        <button class="btn" id="contactBtn">¡Conozcámonos!</button>
-    </section>
+      <div class="card">
+        <h3>Resumen</h3>
+        <p class="muted">Desarrollador web. Rellena aquí con un párrafo corto que describa tu experiencia, intereses y enfoque profesional. Si lo deseas, puedo ayudarte a redactarlo.</p>
+      </div>
 
-    <section id="experience" class="section">
-        <h2>Experiencia</h2>
+      <div class="skills card">
+        <h3>Habilidades</h3>
+        <div class="skill">
+          <div class="label"><span>HTML / CSS</span><span>90%</span></div>
+          <div class="bar"><i style="width:90%"></i></div>
+        </div>
+        <div class="skill">
+          <div class="label"><span>JavaScript</span><span>85%</span></div>
+          <div class="bar"><i style="width:85%"></i></div>
+        </div>
+        <div class="skill">
+          <div class="label"><span>React / SSG</span><span>75%</span></div>
+          <div class="bar"><i style="width:75%"></i></div>
+        </div>
+        <div class="skill">
+          <div class="label"><span>Accesibilidad & UX</span><span>80%</span></div>
+          <div class="bar"><i style="width:80%"></i></div>
+        </div>
+      </div>
+
+      <div class="card contact">
+        <h3>Contacto</h3>
+        <a href="#" id="emailLink">✉️ correo@ejemplo.com</a>
+        <a href="#" id="phone">📞 +00 000 000</a>
+        <a href="#" id="linkedin">🔗 LinkedIn</a>
+      </div>
+
+      <div class="card">
+        <h3>Descarga</h3>
+        <button class="btn" id="downloadCv">Descargar CV (PDF)</button>
+        <p class="muted" style="margin-top:8px;font-size:13px">Consejo: sube el PDF al repositorio y cambia este botón al enlace directo.</p>
+      </div>
+
+    </aside>
+
+    <main class="main">
+      <div class="neon-line"></div>
+
+      <section class="hero">
+        <div class="intro">
+          <div class="tag">Currículum interactivo</div>
+          <h2>Hola, soy <span class="glow">Lluc Sánchez</span></h2>
+          <p class="muted">Explora mi experiencia, proyectos destacados y cómo contactarme. Este sitio está optimizado para publicarse en GitHub Pages (index.html en la raíz del repo).</p>
+        </div>
+
+        <div class="actions">
+          <button class="btn" id="contactBtn">Contactar</button>
+          <button class="btn ghost" id="toggleTheme">Oscuro / Claro</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>Experiencia</h3>
         <div class="timeline">
-            <div class="card">
-                <h3>Desarrollador Frontend</h3>
-                <p>2020 - Actualidad</p>
-                <p>Trabajo en la creación de aplicaciones web interactivas utilizando React, Vue.js y tecnologías emergentes.</p>
+          <div class="item">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <strong>Posición / Empresa</strong>
+              <span class="muted">2022 — Presente</span>
             </div>
-            <div class="card">
-                <h3>Diseñador UX/UI</h3>
-                <p>2018 - 2020</p>
-                <p>Diseño interfaces intuitivas, accesibles y modernas para diversas plataformas.</p>
+            <div class="meta muted" style="margin-top:8px">Descripción breve de las responsabilidades y logros. Reemplaza con tu información real.</div>
+          </div>
+
+          <div class="item">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <strong>Posición anterior</strong>
+              <span class="muted">2019 — 2022</span>
             </div>
+            <div class="meta muted" style="margin-top:8px">Descripción breve de la experiencia previa.</div>
+          </div>
         </div>
-    </section>
+      </section>
 
-    <section id="contact" class="section">
-        <h2>Contacto</h2>
-        <div class="contact-info">
-            <p>Email: lluc@example.com</p>
-            <p>Teléfono: +34 123 456 789</p>
+      <section class="card">
+        <h3>Proyectos destacados</h3>
+        <div class="projects" id="projectsGrid">
+          <div class="project" data-title="Proyecto A" data-desc="Descripción corta del proyecto A.">
+            <h4>Proyecto A</h4>
+            <p class="muted">SPA, despliegue en GitHub Pages</p>
+          </div>
+          <div class="project" data-title="Proyecto B" data-desc="Descripción corta del proyecto B.">
+            <h4>Proyecto B</h4>
+            <p class="muted">App web, API pública</p>
+          </div>
+          <div class="project" data-title="Proyecto C" data-desc="Descripción corta del proyecto C.">
+            <h4>Proyecto C</h4>
+            <p class="muted">Proyecto experimental</p>
+          </div>
         </div>
-    </section>
+      </section>
 
-    <footer>
-        <p>&copy; 2025 Lluc Sánchez | Todos los derechos reservados.</p>
-    </footer>
+      <section class="card">
+        <h3>Educación</h3>
+        <div class="timeline">
+          <div class="item">
+            <strong>Formación / Universidad</strong>
+            <div class="meta muted">Fechas • Título • Notas</div>
+          </div>
+        </div>
+      </section>
 
-    <script src="script.js"></script>
+      <section class="card">
+        <h3>Contacto rápido</h3>
+        <div class="contacts-row">
+          <button class="btn" id="mailtoBtn">Enviar correo</button>
+          <a class="btn ghost" href="#" id="githubLink">Ver en GitHub</a>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- modal for project preview -->
+  <div class="modal" id="modal">
+    <div class="box">
+      <button class="btn" id="closeModal">Cerrar</button>
+      <div id="modalContent" style="margin-top:12px"></div>
+    </div>
+  </div>
+
+  <script>
+    // Basic interactivity
+    const modal = document.getElementById('modal');
+    const modalContent = document.getElementById('modalContent');
+    document.getElementById('closeModal').addEventListener('click', ()=> modal.classList.remove('open'));
+
+    // Project cards -> modal
+    document.querySelectorAll('.project').forEach(card=>{
+      card.addEventListener('click', ()=>{
+        const title = card.dataset.title || card.querySelector('h4').innerText;
+        const desc = card.dataset.desc || card.querySelector('p').innerText;
+        modalContent.innerHTML = `<h3>${title}</h3><p class=\"muted\">${desc}</p><p style=\"margin-top:12px\">Enlace: <a href=\"#\">repositorio</a> • <a href=\"#\">demo</a></p>`;
+        modal.classList.add('open');
+      });
+    });
+
+    // simple theme toggle (keeps dark as main, quick demo for 'Oscuro/Claro')
+    const toggleTheme = document.getElementById('toggleTheme');
+    toggleTheme.addEventListener('click', ()=>{
+      if(document.documentElement.style.getPropertyValue('--bg') === ''){
+        document.documentElement.style.setProperty('--bg','#f6f8fb');
+        document.documentElement.style.setProperty('--panel','#ffffff');
+        document.documentElement.style.setProperty('--muted','#55606a');
+        document.documentElement.style.setProperty('--accent-1','#0066ff');
+        document.documentElement.style.setProperty('--accent-2','#00bfa5');
+        document.documentElement.style.setProperty('--glass','rgba(0,0,0,0.04)');
+        document.body.style.color = '#071018';
+      } else {
+        document.documentElement.style.removeProperty('--bg');
+        document.documentElement.style.removeProperty('--panel');
+        document.documentElement.style.removeProperty('--muted');
+        document.documentElement.style.removeProperty('--accent-1');
+        document.documentElement.style.removeProperty('--accent-2');
+        document.documentElement.style.removeProperty('--glass');
+        document.body.style.color = '';
+      }
+    });
+
+    // contact button shortcuts
+    document.getElementById('contactBtn').addEventListener('click', ()=>{
+      window.location.hash = '#contact';
+      document.getElementById('mailtoBtn').focus();
+    });
+    document.getElementById('mailtoBtn').addEventListener('click', ()=>{
+      window.location.href = 'mailto:correo@ejemplo.com?subject=Contacto%20desde%20tu%20CV%20web';
+    });
+
+    // faux "download" action (replace with real file path in your repo)
+    document.getElementById('downloadCv').addEventListener('click', ()=>{
+      const link = document.createElement('a');
+      link.href = './cv-lluc-sanchez.pdf'; // cambia por la ruta real
+      link.download = 'CV-Lluc-Sanchez.pdf';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    });
+
+    // skill bars animate on load
+    window.addEventListener('load', ()=>{
+      document.querySelectorAll('.bar > i').forEach((el,idx)=>{
+        setTimeout(()=> el.style.width = el.style.width, 200 + idx*120);
+      });
+    });
+
+    // simple starfield background
+    (function(){
+      const canvas = document.getElementById('starfield');
+      const ctx = canvas.getContext('2d');
+      let w = canvas.width = innerWidth;
+      let h = canvas.height = innerHeight;
+      const stars = Array.from({length:140}, ()=>({x:Math.random()*w,y:Math.random()*h,z:Math.random()*1}));
+      function resize(){w=canvas.width=innerWidth;h=canvas.height=innerHeight}
+      addEventListener('resize', resize);
+      function draw(){
+        ctx.clearRect(0,0,w,h);
+        for(let s of stars){
+          s.x += (s.z+0.2)*0.15; s.y += Math.sin((s.x+s.y)/100)*0.02;
+          s.z += 0.0005;
+          if(s.x > w+10){s.x = -10; s.y = Math.random()*h; s.z = Math.random()*1}
+          const size = (s.z+0.2)*2; const alpha = 0.2 + s.z*0.8;
+          ctx.beginPath(); ctx.fillStyle = `rgba(156,255,244,${alpha})`; ctx.arc(s.x,s.y,size,0,Math.PI*2); ctx.fill();
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
+    // accessibility: keyboard close modal
+    document.addEventListener('keydown', e=>{ if(e.key === 'Escape') modal.classList.remove('open') });
+
+  </script>
 </body>
 </html>
