@@ -1,3 +1,4 @@
+/* Reset global styles */
 * {
     margin: 0;
     padding: 0;
@@ -5,90 +6,140 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    background-color: #f0f0f0;
-    color: #333;
+    font-family: 'Roboto', sans-serif;
+    background: #121212;
+    color: #fff;
     overflow-x: hidden;
+    transition: background-color 0.5s;
 }
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(45deg, #6a11cb, #2575fc);
-    color: white;
-    text-align: center;
-    padding: 60px 20px;
+    background: linear-gradient(45deg, #4a90e2, #50c7c7, #ff4f00);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
-    z-index: 1;
+    text-align: center;
+    overflow: hidden;
 }
 
-.hero .name {
-    font-size: 3em;
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    z-index: 2;
+    color: white;
+    transform: scale(1);
+    animation: fadeIn 1s ease-out;
+}
+
+.name {
+    font-size: 4rem;
     font-weight: bold;
-    animation: fadeIn 1.5s ease-out;
+    color: white;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
 }
 
-.hero .role {
-    font-size: 1.5em;
+.role {
+    font-size: 1.5rem;
     margin-top: 10px;
+    font-weight: 300;
     opacity: 0;
     animation: fadeIn 2s ease-out 0.5s forwards;
 }
 
-/* Sections */
+/* Section Styles */
 .section {
-    padding: 50px 20px;
+    padding: 80px 20px;
     text-align: center;
-    background-color: white;
-    margin-bottom: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #1a1a1a;
+    border-radius: 20px;
+    margin: 20px 0;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
     transform: translateY(30px);
     opacity: 0;
     animation: slideUp 1s ease-out forwards;
 }
 
 h2 {
-    font-size: 2em;
+    font-size: 2.5rem;
+    color: #ff4f00;
     margin-bottom: 20px;
-    color: #333;
 }
 
+p {
+    font-size: 1.1rem;
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+/* Timeline */
 .timeline {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 20px;
 }
 
-.timeline li {
-    background-color: #f4f4f4;
-    margin: 10px 0;
+.card {
+    background: #2c2c2c;
+    border-radius: 10px;
     padding: 20px;
-    border-left: 5px solid #2575fc;
-    border-radius: 8px;
-    transition: transform 0.3s ease;
+    width: 250px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s;
 }
 
-.timeline li:hover {
-    transform: scale(1.05);
+.card:hover {
+    transform: translateY(-10px);
 }
 
+.card h3 {
+    font-size: 1.5rem;
+    color: #ff4f00;
+}
+
+.card p {
+    font-size: 1rem;
+    color: #aaa;
+}
+
+/* Button */
 .btn {
-    background-color: #2575fc;
+    background-color: #ff4f00;
     color: white;
-    border: none;
-    padding: 12px 25px;
-    font-size: 1.2em;
+    padding: 15px 30px;
+    font-size: 1.2rem;
     border-radius: 5px;
+    border: none;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
 }
 
 .btn:hover {
-    background-color: #6a11cb;
+    background-color: #ff7f40;
 }
 
-/* Animaciones */
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+}
+
+/* Animations */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -109,36 +160,31 @@ h2 {
     }
 }
 
-/* Contact Section */
-.contact-info {
-    background-color: #e6e6e6;
-    padding: 15px;
-    border-radius: 8px;
-    margin-top: 20px;
-}
-
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #2575fc;
-    color: white;
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
     .name {
-        font-size: 2.5em;
+        font-size: 3rem;
     }
 
     .role {
-        font-size: 1.2em;
+        font-size: 1.2rem;
+    }
+
+    .section {
+        padding: 60px 20px;
+    }
+
+    .timeline {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 80%;
+        margin-bottom: 20px;
     }
 
     .btn {
         width: 100%;
-    }
-
-    .contact-info p {
-        font-size: 1em;
     }
 }
